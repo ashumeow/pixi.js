@@ -88,7 +88,6 @@ Object.defineProperty( PIXI.MovieClip.prototype, 'totalFrames', {
 	}
 });
 
-
 /**
  * Stops the MovieClip
  *
@@ -151,6 +150,8 @@ PIXI.MovieClip.prototype.updateTransform = function()
 
     var round = (this.currentFrame + 0.5) | 0;
 
+    this.currentFrame = this.currentFrame % this.textures.length;
+
     if(this.loop || round < this.textures.length)
     {
         this.setTexture(this.textures[round % this.textures.length]);
@@ -172,7 +173,7 @@ PIXI.MovieClip.prototype.updateTransform = function()
  * @method fromFrames
  * @param frames {Array} the array of frames ids the movieclip will use as its texture frames
  */
-PIXI.MovieClip.prototype.fromFrames = function(frames)
+PIXI.MovieClip.fromFrames = function(frames)
 {
     var textures = [];
 
@@ -188,10 +189,10 @@ PIXI.MovieClip.prototype.fromFrames = function(frames)
  * A short hand way of creating a movieclip from an array of image ids
  *
  * @static
- * @method fromFrames
+ * @method fromImages
  * @param frames {Array} the array of image ids the movieclip will use as its texture frames
  */
-PIXI.MovieClip.prototype.fromImages = function(images)
+PIXI.MovieClip.fromImages = function(images)
 {
     var textures = [];
 
